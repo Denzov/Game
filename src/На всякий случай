@@ -1,0 +1,217 @@
+//struct Ball {
+//    Vector2 BallPosition = {300, 400};          //Позиция мяча
+//    Vector2 BallSpeed = {0, 0};
+//    Vector2 bricPosition;//Скорость мяча
+//    int widthBric;
+//    int heightBric;
+//    float ballRadius = 5;                       //Радиус мяча
+//    bool isOutOfBounds = false;                 //Мяч в не границе
+//    int screenWidth;
+//    int sideCannon;                  //Сторона пушки
+//    int thickLine;                    //Толщина лини
+//    int screenHeight = 800 - sideCannon - thickLine * 2;//Вычисление области, в которой мяч отражается
+//
+////    Ball(float screenWidth, int thickLine, int sideCannon, Vector2 bricPosition, int widthBric, int heightBric) : screenWidth(screenWidth), thickLine(thickLine),
+////                                                             sideCannon(sideCannon), bricPosition(bricPosition), widthBric(widthBric),  heightBric(heightBric){
+////        screenHeight = 800 - sideCannon - thickLine * 2;
+////    }
+//    Ball(float screenWidth, int thickLine, int sideCannon) : screenWidth(screenWidth), thickLine(thickLine),
+//                                                             sideCannon(sideCannon) {
+//        screenHeight = 800 - sideCannon - thickLine * 2;
+//    }
+//
+//    Ball() {
+//    }
+//
+//    void checkCollisionBall(Vector2 BallPosition, float ballRadius, Vector2 bricPosition, int widthBric, int heightBric) {
+//        if (CheckCollisionCircleRec(BallPosition, ballRadius, {
+//                bricPosition.x,
+//                bricPosition.y,
+//                (float) widthBric,
+//                (float) heightBric
+//        })) {
+////            cout<<"YesCollision"<<endl;
+//
+//            if (BallPosition.x <= bricPosition.x || BallPosition.x >= bricPosition.x + widthBric) BallSpeed.x *= -1;
+//            else if (BallPosition.y <= bricPosition.y || BallPosition.y >= bricPosition.y + heightBric)
+//                BallSpeed.y *= -1;
+//        }
+//    }
+
+//    void drawBall() {                           //Отрисовываем с физикой движения
+//
+//        BallPosition.x += BallSpeed.x;
+//        BallPosition.y += BallSpeed.y;
+//        if ((BallPosition.x + ballRadius >= screenWidth) || (BallPosition.x - ballRadius <= 0)) BallSpeed.x *= -1;
+//        if (BallPosition.y - ballRadius <= 0) BallSpeed.y *= -1;
+//
+//        DrawCircle(BallPosition.x, BallPosition.y, ballRadius, YELLOW);
+//    }
+//};
+
+//struct Cannon {                                 //Пушка
+//    bool isShooting = false;
+//    float screenWidth;
+//    float screenHeight;
+//    const float sideCannon = 50;
+//    int thickBoundaryLine;
+//    const float cannonPositionY = screenHeight - sideCannon - 1;
+//    int cannonPositionX = screenWidth / 2;
+//    Vector2 cannonPosition = {screenHeight, screenWidth / 2};
+//    float cannonAngle = 180;
+//    float cannonMuzzleWidth = 15;
+//    float cannonMuzzleHeight = 15;
+//
+//    Cannon(float screenWidth, float screenHeight, int thickBoundaryLine) : screenWidth(screenWidth),
+//                                                                           screenHeight(screenHeight),
+//                                                                           thickBoundaryLine(thickBoundaryLine) {
+//
+//    }
+//
+//    void drawCannon() {//Рисуем пушку
+//        float shiftCannon = 3;
+//        if (IsKeyDown(KEY_LEFT)) {
+//            cannonPositionX -= shiftCannon;
+//        } else if (IsKeyDown(KEY_RIGHT)) {
+//            cannonPositionX += shiftCannon;
+//        }
+//        if (!isShooting) {
+//            if (IsKeyDown(KEY_UP)) {
+//                cannonAngle -= 2;
+//            } else if (IsKeyDown(KEY_DOWN)) {
+//                cannonAngle += 2;
+//            }
+//        }
+//        if (cannonPositionX >= screenWidth - sideCannon) {
+//            cannonPositionX -= shiftCannon;
+//        }
+//        if (cannonPositionX <= 0) {
+//            cannonPositionX += shiftCannon;
+//        }
+//
+//        DrawRectanglePro({(float) (cannonPositionX + sideCannon / 4),
+//                          (float) (cannonPositionY - thickBoundaryLine * 2), cannonMuzzleWidth, cannonMuzzleHeight},
+//                         {5, 0}, cannonAngle, GOLD);
+//        DrawRectangle(cannonPositionX, cannonPositionY, sideCannon / 2, sideCannon, BLUE);
+//    }
+//};
+
+//struct Bric {
+//    int widthBric = 80;
+//    int heightBric = 40;
+//    Vector2 bricPosition = {200, 200};
+//    Color colorBric = {GREEN};
+//
+//    int point = 0;
+//
+//    void drawBric() {
+//        DrawRectangle(bricPosition.x, bricPosition.y, widthBric, heightBric, colorBric);
+//    }
+//};
+
+//void drawBoundaryLine(float screenWidth,
+//                      int sideCannon,
+//                      int thickLine,
+//                      float screenHeight
+//) {
+//    DrawLineEx({0, screenHeight - sideCannon - 5}, {screenWidth, screenHeight - sideCannon - 5}, thickLine, WHITE);
+//}
+void preEntryInBall(bool &wasSpacePressed,
+                    bool &inGame,
+                    Cannon &cannon,
+                    float &lastBall,
+                    float ballDelta,
+                    vector<Ball> &balls,
+                    int valueBalls,
+                    const int sideCannon,
+                    const int thickBoundaryLine,
+                    vector<Bric> &brics
+                    ){
+    if (IsKeyPressed(KEY_SPACE) || wasSpacePressed) {                       //Если нажат ПРОБЕЛ
+        inGame = true;
+        cannon.isShooting = true;
+
+        Ball b(cannon.screenWidth, thickBoundaryLine, sideCannon);
+        Vector2 cannonAngle;
+        cannonAngle.x = -cos(cannon.cannonAngle / 180 * PI - PI / 2) * 3;
+        cannonAngle.y = -sin(cannon.cannonAngle / 180 * PI - PI / 2) * 3;
+        if (GetTime() - lastBall > ballDelta &&
+            balls.size() < valueBalls) {    //Когда наступает время ballDelta и кол-во мячей меньше чем нужное кол-во
+            //Создаем вспомогательный мяч
+            b.BallSpeed = {cannonAngle.x, cannonAngle.y};
+            b.BallPosition.x = cannon.cannonPositionX + sideCannon /
+                                                        4;                                 //Точка появление мяча по оси x = середине пушки по X
+            b.BallPosition.y = cannon.cannonPositionY - thickBoundaryLine * 2 +
+                               5;                          //Точка появление мяча по оси y = высоте пушки
+            balls.push_back(b);                                   //Кладем в конец вектора мячей вспомогательный мяч
+            lastBall = GetTime();
+            wasSpacePressed = true;
+        }
+    }
+
+}
+void checkAndDraw(bool &wasSpacePressed,
+                  Cannon &cannon,
+                  float &lastBall,
+                  vector<Ball> &balls,
+                  const int thickBoundaryLine,
+                  int valueBrics,
+                  vector<Bric> brics,
+                  bool &inGame) {
+
+//////////////////////////////////////////////////////
+    if (inGame) {
+        for (int i = 0; i < balls.size(); ++i) {    ///Берем все выпущенные мячи
+//////////////////////////////////////////////////////Смотрим за каждым выпущенным мячом на наличие выхода за ограничительную линию и расчитываем рисовать его или нет
+            if (balls[i].isOutOfBounds) {           ///Если мяч за пределами
+                balls[i].isOutOfBounds = false;
+                balls[i].BallSpeed = {0, 0};
+
+            }
+/////////////////////////////////////////////////////Проверяем на столкновение с каждым кирпичом
+
+/////////////////////////////////////////////////////Отрисовываем выпущенные мячи
+
+            if (balls[i].BallPosition.y + balls[i].ballRadius >= 800 - thickBoundaryLine - cannon.sideCannon) {    ///Если мяч выходит за белую черту,
+                balls[i].isOutOfBounds = true;                                                              ///то отмечаем это
+            }
+            if (!(balls[i].isOutOfBounds)) {
+                for (int j = 0; j < valueBrics; ++j) {
+                    balls[i].checkCollisionBall(balls[i].BallPosition, balls[i].ballRadius,
+                                                {brics[j].bricPosition.x, brics[j].bricPosition.y}, brics[j].widthBric,
+                                                brics[j].heightBric);
+//                cout<<balls[i].BallPosition.x<<"  "<<balls[i].BallPosition.x<<"//////////"<< brics[0].bricPosition.x<< brics[0].bricPosition.y<<endl;
+                }
+                balls[i].drawBall();                //Рисуем мяч
+            }
+        }
+    }
+}
+
+
+//    const int screenWidth = 400;
+//    const int screenHeight = 400;
+//    /////////////////////////////////
+//    InitWindow(screenWidth, screenHeight, "raylib [core] example");
+//    //////////////////////////////////
+//    const int FPS = 120;                         //Кадры в секунду
+//    SetTargetFPS(FPS);
+//    //////////////______VALUE______/////////////////////
+//    int valueBalls = 10;                        //Количество мячей
+//    int valueBrics = 1;
+//    ///////////////______TIME______///////////////////////
+//    float ballDelta = 0.1;                      //Время между выпуском мяча
+//    float lastBall = 0;                         //Время последнего выпущенного мяча
+//    ///////////////______BOOL______//////////////////////
+//    bool wasSpacePressed = false;               //Прожат ли ПРОБЕЛ
+//    bool inGame = false;
+//    //////////////______VECTORS______///////////////////////
+//    vector<Ball> balls(0);                  //Вектор мячей
+//    vector<Bric> brics(1);
+//    //////////////______SIZE______////////////////////
+//    const int thickBoundaryLine = 5;            //Ширина ограничитиленьной линии
+//    //////////////______STRUCTS______////////////////////
+//    Cannon cannon(screenWidth, screenHeight, thickBoundaryLine);                              //Пушка
+//    ///////////////////////////////////
+      int widthBric = screenWidth / bricsInLineX;
+      int heightBric = screenHeight/(bricsInLineY);
