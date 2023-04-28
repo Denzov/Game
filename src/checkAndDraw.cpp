@@ -2,7 +2,8 @@
 // Created by podlesnyims on 07.04.2023.
 //
 #include "chechAndDraw.h"
-void spawnAndShiftBrics(vector<Bric>& brics, int& gamesPoints, int &nSeats, bool& isGameOver, vector<Ball>& balls, vector<BallWithPoint> &ballWithPoints) {
+void spawnAndShiftBrics(vector<Bric>& brics, int& gamesPoints, int &nSeats, bool& isGameOver, vector<Ball>& balls,
+    vector<BallWithPoint> &ballWithPoints) {
     for (int i = 0; i < brics.size(); ++i) {
         brics[i].shiftBric();
         if (brics[i].bricPosition.y + heightBric >= screenLenghtY) {
@@ -54,7 +55,18 @@ void spawnAndShiftBrics(vector<Bric>& brics, int& gamesPoints, int &nSeats, bool
     
     
 
+void drawTextSpeedTime(float timeInGame)
+    {
 
+    int speedTime = timeInGame / stepTimeSpeedInGame  + 1;
+    string strSpeedTime = to_string(speedTime);
+
+
+    string textTimeSpeed = strSpeedTime+'X';
+    
+    DrawText(textTimeSpeed.c_str(), screenLenghtX/1.2, 0, 40, LIGHTGRAY);
+
+    }
 void checkAndDraw(bool &wasSpacePressed,
                   Cannon &cannon,
                   float &lastBall,
@@ -65,18 +77,21 @@ void checkAndDraw(bool &wasSpacePressed,
                   bool &isGameOver,
                   int &nSeats,
                   vector<BallWithPoint> &ballWithPoints,
-                  int &addBals) {
+                  int &addBals, float &timeInGame) {
 
 //////////////////////////////////////////////////////
     static bool firstStep=false;
+    static float lasGetTime;
     if(!inGame && firstStep == 0){
         firstStep=true;
         spawnAndShiftBrics(brics, gamesPoints, nSeats, isGameOver, balls, ballWithPoints);
     }
 
     if (inGame) {
+        
+        timeInGame = GetTime() - lasGetTime;
         int isOutOfBoundsBalls = 0;
-
+        drawTextSpeedTime(timeInGame);
         for (int i = 0; i < balls.size(); ++i) {    ///Берем все выпущенные мячи
             if (balls[i].BallPosition.y + balls[i].ballRadius >= screenLenghtY - underScreensZone) {    ///Если мяч выходит за белую черту,
                 balls[i].isOutOfBounds = true;                                                              ///то отмечаем это
@@ -129,6 +144,8 @@ void checkAndDraw(bool &wasSpacePressed,
             inGame = false;
             valueBalls += addBals;
             addBals=0;
+            lasGetTime = GetTime();
+            timeInGame = 0;
         }
     }
 }

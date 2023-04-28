@@ -30,6 +30,6 @@ void runGame(bool &wasSpacePressed,
              int &gamesPoints,
              bool &isGameOver,
              int &nSeats, vector<BallWithPoint> &ballWithPoints,
-             int &addBals);
+             int &addBals, float &timeInGame);
 
 #endif //RAYLIBTEMPLATE_RUNGAME_H

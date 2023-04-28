@@ -24,11 +24,12 @@ const int underScreensZone = thickBoundaryLine+50;
 const int screenLenghtX = screenWidth;
 const int screenLenghtY = screenHeight + underScreensZone;
 //////////////////////////////////
-const int FPS = 120;                         //Кадры в секунду
+const int FPS = 60;                         //Кадры в секунду
 
 ///////////////______TIME______///////////////////////
 const float ballDelta = 0.1;                      //Время между выпуском мяча
 const float EnterDelta = 0.1;
+const float stepTimeSpeedInGame = 3;
 //////////////______STRINGS______///////////////////
 
 

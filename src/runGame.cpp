@@ -22,7 +22,7 @@ void runGame( bool &wasSpacePressed,
              bool &isGameOver,
              int &nSeats,
              vector<BallWithPoint> &ballWithPoints,
-              int &addBals){
+              int &addBals, float &timeInGame){
 
 
 
@@ -56,7 +56,7 @@ void runGame( bool &wasSpacePressed,
                      valueBalls,
                      gamesPoints, isGameOver, nSeats,
                      ballWithPoints,
-                     addBals);
+                     addBals, timeInGame);
 
 
         cannon.drawCannon();

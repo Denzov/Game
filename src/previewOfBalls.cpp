@@ -6,9 +6,10 @@
 void previewOfBalls(Vector2 cannonAngle, Cannon cannon, vector<Bric> brics, bool inGame) {
     vector<Ball> balls;
     Ball b;
-    static int nFarame = 60;
+    static int nFrame = 60;
     if (!inGame) {
-        for (int i = 0; i < nFarame; ++i) {
+
+        for (int i = 0; i < nFrame; ++i) {
 
 
             b.BallSpeed = {cannonAngle.x * 15, cannonAngle.y * 15};
@@ -31,6 +32,7 @@ void previewOfBalls(Vector2 cannonAngle, Cannon cannon, vector<Bric> brics, bool
 
                     }
                 }
+
                 balls[j].ballColor = WHITE;
                 balls[j].drawBall();
             }

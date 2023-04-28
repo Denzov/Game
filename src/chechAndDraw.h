@@ -23,7 +23,7 @@ void checkAndDraw(bool &wasSpacePressed,
                   bool &inGame, int &valueBalls,
                   int &gamesPoints, bool &isGameOver,
                   int& nSeats, vector<BallWithPoint> &ballWithPoints,
-                  int &addBals);
+                  int &addBals, float &timeInGame);
 
 #endif //RAYLIBTEMPLATE_CHECHANDDRAW_H
 

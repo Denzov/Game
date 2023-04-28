@@ -28,6 +28,8 @@ int main() {
     ///////////////______TIME______///////////////////////
     float lastBall = 0;
     float lastEnterPressed = 0;
+    float timeInGame = 0;
+
     //Время последнего выпущенного мяча
     //////////////______VALUE______/////////////////////
     int valueBalls = 1;                        //Количество мячей
@@ -72,10 +74,12 @@ int main() {
     SetTargetFPS(FPS);
     while (!WindowShouldClose()) {
         BeginDrawing();
+        cout << timeInGame<<endl;
         drawMenu(inMenu, lastEnterPressed, isGameOver);
-        for (int i = 0; i < int(gamesPoints/3)+1; ++i) {
+        int speedGame;
+        for (int i = 0; i < int(timeInGame/stepTimeSpeedInGame)+1; ++i) {
             runGame(wasSpacePressed, inGame, cannon, lastBall, balls, valueBalls, brics, inMenu, lastEnterPressed, gamesPoints,
-                    isGameOver, nSeats, ballWithPoints, addBalls);
+                    isGameOver, nSeats, ballWithPoints, addBalls, timeInGame);
         }
         drawScreenGameOver(isGameOver, lastEnterPressed, inGame, inMenu);
         EndDrawing();
