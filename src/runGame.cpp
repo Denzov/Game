@@ -2,12 +2,12 @@
 #include "runGame.h"
 void drawTextPoints(int &gamesPoints) {
     string strGamesPoint = to_string(gamesPoints);
-    DrawText(strGamesPoint.c_str(), 0, 0, 40, WHITE);
+    DrawText(strGamesPoint.c_str(), 0, 0, 40, LIGHTGRAY);
 }
 void drawTextValueBalls(int valueBalls){
     string strGamesValueBalls = to_string(valueBalls);
-    DrawText(strGamesValueBalls.c_str(), screenLenghtX/2.8 ,  screenLenghtY-underScreensZone+5, 40, WHITE);
-    DrawText("Value balls:",  20 ,  screenLenghtY-underScreensZone+20, 20, WHITE);
+    DrawText(strGamesValueBalls.c_str(), screenLenghtX/2.8 ,  screenLenghtY-underScreensZone+5, 40, LIGHTGRAY);
+    DrawText("Value balls:",  20 ,  screenLenghtY-underScreensZone+20, 20, LIGHTGRAY);
 }
 
 void runGame( bool &wasSpacePressed,
