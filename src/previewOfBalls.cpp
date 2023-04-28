@@ -9,11 +9,11 @@ void previewOfBalls(Vector2 cannonAngle, Cannon cannon, vector<Bric> brics, bool
     static float cannonAngle0 = 3;
     static int nFarame = 60;
     static float KSpeed = (screenHeight / cannonAngle0) / nFarame + 1.5;
-    if(!inGame){
+    if(true){
     for (int i = 0; i < nFarame; ++i) {
 
 
-        b.BallSpeed = {cannonAngle.x * KSpeed, cannonAngle.y * KSpeed};
+        b.BallSpeed = {cannonAngle.x * 15, cannonAngle.y * 15 };
         b.BallPosition.x = (cannon.cannonPositionX + sideCannonX /
                                                      4);                                 ///Точка появление мяча по оси x = середине пушки по X
         b.BallPosition.y = cannon.cannonPositionY - thickBoundaryLine *
