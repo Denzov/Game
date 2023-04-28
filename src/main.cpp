@@ -73,8 +73,10 @@ int main() {
     while (!WindowShouldClose()) {
         BeginDrawing();
         drawMenu(inMenu, lastEnterPressed, isGameOver);
-        runGame(wasSpacePressed, inGame, cannon, lastBall, balls, valueBalls, brics, inMenu, lastEnterPressed, gamesPoints,
-                isGameOver, nSeats, ballWithPoints, addBalls);
+        for (int i = 0; i < int(gamesPoints/3)+1; ++i) {
+            runGame(wasSpacePressed, inGame, cannon, lastBall, balls, valueBalls, brics, inMenu, lastEnterPressed, gamesPoints,
+                    isGameOver, nSeats, ballWithPoints, addBalls);
+        }
         drawScreenGameOver(isGameOver, lastEnterPressed, inGame, inMenu);
         EndDrawing();
     }

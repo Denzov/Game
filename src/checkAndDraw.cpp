@@ -78,7 +78,7 @@ void checkAndDraw(bool &wasSpacePressed,
         int isOutOfBoundsBalls = 0;
 
         for (int i = 0; i < balls.size(); ++i) {    ///Берем все выпущенные мячи
-            if (balls[i].BallPosition.y + balls[i].ballRadius >= screenLenghtY - underScreensZone*2) {    ///Если мяч выходит за белую черту,
+            if (balls[i].BallPosition.y + balls[i].ballRadius >= screenLenghtY - underScreensZone) {    ///Если мяч выходит за белую черту,
                 balls[i].isOutOfBounds = true;                                                              ///то отмечаем это
             }
 

@@ -4,6 +4,12 @@ void drawTextPoints(int &gamesPoints) {
     string strGamesPoint = to_string(gamesPoints);
     DrawText(strGamesPoint.c_str(), 0, 0, 40, WHITE);
 }
+void drawTextValueBalls(int valueBalls){
+    string strGamesValueBalls = to_string(valueBalls);
+    DrawText(strGamesValueBalls.c_str(), screenLenghtX/2.8 ,  screenLenghtY-underScreensZone+5, 40, WHITE);
+    DrawText("Value balls:",  20 ,  screenLenghtY-underScreensZone+20, 20, WHITE);
+}
+
 void runGame( bool &wasSpacePressed,
              bool &inGame,
              Cannon &cannon,
@@ -21,7 +27,9 @@ void runGame( bool &wasSpacePressed,
 
 
     drawTextPoints(gamesPoints);
+
     if(!inMenu &&  GetTime() - lastEnterPressed >= EnterDelta && !isGameOver ) {
+        Vector2 cannonAngle;
         if(IsKeyPressed(KEY_ENTER) ){
             inMenu = true;
 
@@ -35,7 +43,7 @@ void runGame( bool &wasSpacePressed,
         for (int i = 0; i < ballWithPoints.size(); i++) {
             ballWithPoints[i].drawPoint();
         }
-        Vector2 cannonAngle;
+        drawTextValueBalls(valueBalls);
         cannonAngle = preEntryInBall(wasSpacePressed, inGame, cannon, lastBall, balls, valueBalls, brics);
         /////////////////////////////////////////////////////////////
         previewOfBalls(cannonAngle, cannon, brics, inGame);

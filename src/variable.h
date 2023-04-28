@@ -20,11 +20,11 @@ const Color colorBrics[6] = {MAROON, DARKGREEN, SKYBLUE, DARKPURPLE, ORANGE, DAR
 ////////////_____Screen_____/////////////////////
 const int screenWidth = 400;
 const int screenHeight = bricsInLineY*heightBric;
-const int underScreensZone = thickBoundaryLine;
+const int underScreensZone = thickBoundaryLine+50;
 const int screenLenghtX = screenWidth;
 const int screenLenghtY = screenHeight + underScreensZone;
 //////////////////////////////////
-const int FPS = 240;                         //Кадры в секунду
+const int FPS = 120;                         //Кадры в секунду
 
 ///////////////______TIME______///////////////////////
 const float ballDelta = 0.1;                      //Время между выпуском мяча

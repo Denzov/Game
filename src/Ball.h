@@ -18,7 +18,6 @@ public:
     Vector2 BallSpeed = {0, 0};
     float ballRadius = 5;                       //Радиус мяча
     bool isOutOfBounds = false;                 //Мяч в не границе     //Сторона пушки
-    float screenZona = screenLenghtY-underScreensZone;//Вычисление области, в которой мяч отражается
     Color ballColor = YELLOW;
 
 
