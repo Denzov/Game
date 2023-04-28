@@ -13,15 +13,15 @@ void Cannon::drawCannon() {
     if (!isShooting) {
         
         if (IsKeyDown(KEY_UP)) {
-            cannonAngle -= 2;
+            cannonAngle -= 1;
         } else if (IsKeyDown(KEY_DOWN)) {
-            cannonAngle += 2;
+            cannonAngle += 1;
         }
         if (cannonAngle <= 92) {
-            cannonAngle += 2;
+            cannonAngle += 1;
         }
         else if (cannonAngle >= 268) {
-            cannonAngle -= 2;
+            cannonAngle -= 1;
         }
     }
     if (cannonPositionX+sideCannonX/2 >= screenWidth) {

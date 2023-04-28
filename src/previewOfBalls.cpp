@@ -3,12 +3,13 @@
 //
 #include "previewOfBalls.h"
 
-void previewOfBalls(Vector2 cannonAngle, Cannon cannon, vector<Bric> brics) {
+void previewOfBalls(Vector2 cannonAngle, Cannon cannon, vector<Bric> brics, bool inGame) {
     vector<Ball> balls;
     Ball b;
     static float cannonAngle0 = 3;
     static int nFarame = 60;
     static float KSpeed = (screenHeight / cannonAngle0) / nFarame + 1.5;
+    if(!inGame){
     for (int i = 0; i < nFarame; ++i) {
 
 
@@ -20,21 +21,22 @@ void previewOfBalls(Vector2 cannonAngle, Cannon cannon, vector<Bric> brics) {
         balls.push_back(b);                                   ///Клад
         for (int j = 0; j < balls.size(); ++j) {
             if (!brics.empty()) {
+
                 for (int k = 0; k < brics.size(); ++k) {
 
 
-                    if (balls[j].checkCollisionBall(balls[j].BallPosition, balls[j].ballRadius,
-                                                    {brics[k].bricPosition.x, brics[k].bricPosition.y})) {
+                    if (balls[j].checkCollisionBall({brics[k].bricPosition.x, brics[k].bricPosition.y})) {
                         ///////////////////////////////////////////////////////////////////////
                         balls[j].ballReflaction({brics[k].bricPosition.x, brics[k].bricPosition.y});
                         ///////////////////////////////////////////////////////////////////////
-                        }
-
                     }
-                }
-            balls[j].drawBall();
-            }
 
+                }
+            }
+            balls[j].ballColor = WHITE;
+            balls[j].drawBall();
+        }
+    }
         }
 
     }

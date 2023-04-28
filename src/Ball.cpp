@@ -4,9 +4,9 @@
 
 #include "Ball.h"
 
-bool Ball::checkCollisionBall(Vector2 ballPosition, float ballRadius, Vector2 bricPosition) {
+bool Ball::checkCollisionBall( Vector2 bricPosition) {
 
-    Vector2 newBallPosition = {ballPosition.x + BallSpeed.x, ballPosition.y + BallSpeed.y};
+    Vector2 newBallPosition = {BallPosition.x + BallSpeed.x, BallPosition.y + BallSpeed.y};
     if (CheckCollisionCircleRec(newBallPosition, ballRadius, {
             bricPosition.x,
             bricPosition.y,
@@ -28,7 +28,7 @@ void Ball::drawBall() {
     if ((BallPosition.x + ballRadius >= screenWidth) || (BallPosition.x - ballRadius <= 0)) BallSpeed.x *= -1;
     if (BallPosition.y + ballRadius <= 0) BallSpeed.y *= -1;
 
-    DrawCircle(BallPosition.x, BallPosition.y, ballRadius, YELLOW);
+    DrawCircle(BallPosition.x, BallPosition.y, ballRadius, ballColor);
 }
 
 void Ball::ballReflaction(Vector2 bricPosition) {

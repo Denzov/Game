@@ -19,10 +19,10 @@ public:
     float ballRadius = 5;                       //Радиус мяча
     bool isOutOfBounds = false;                 //Мяч в не границе     //Сторона пушки
     float screenZona = screenLenghtY-underScreensZone;//Вычисление области, в которой мяч отражается
+    Color ballColor = YELLOW;
 
 
-
-    bool checkCollisionBall(Vector2 ballPosition, float ballRadius, Vector2 bricPosition);
+    bool checkCollisionBall(Vector2 bricPosition);
 
     void drawBall();
     void ballReflaction(Vector2 bricPosition);

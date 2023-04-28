@@ -9,7 +9,7 @@
 #ifndef RAYLIBTEMPLATE_PREVIEWOFBALLS_H
 #define RAYLIBTEMPLATE_PREVIEWOFBALLS_H
 
-void previewOfBalls(Vector2 cannonAngle, Cannon cannon, vector<Bric> brics );
+void previewOfBalls(Vector2 cannonAngle, Cannon cannon, vector<Bric> brics, bool inGame );
 
 
 #endif //RAYLIBTEMPLATE_PREVIEWOFBALLS_H

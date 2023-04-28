@@ -8,7 +8,7 @@ bool BallWithPoint::checkCollisionBallWithPoints(Ball ball)
 	if (CheckCollisionCircles(pointPosition, pointRadius, ball.BallPosition, ball.ballRadius)) {
 		return true;
 	}
-	else false;
+	else return false;
 	
 }
 

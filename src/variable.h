@@ -14,7 +14,7 @@ const int thickBoundaryLine = 5;            //Ширина ограничити�
 //////////////______VALUE______/////////////////////
 const int bricsInLineX= 5;
 const int bricsInLineY= 20;
-const int initialPoints = 1;
+const int initialPoints = 5;
 
 const Color colorBrics[6] = {MAROON, DARKGREEN, SKYBLUE, DARKPURPLE, ORANGE, DARKBROWN};
 ////////////_____Screen_____/////////////////////

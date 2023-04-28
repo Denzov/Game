@@ -20,14 +20,14 @@ void spawnAndShiftBrics(vector<Bric>& brics, int& gamesPoints, int &nSeats, bool
     }
 
     if (nSeats != bricsInLineX) {
-        nSeats = (int(gamesPoints / 15) + 1)%bricsInLineX;
+        nSeats = (int(gamesPoints / 15) + 2)%bricsInLineX;
     }
     vector <int> availableSeats(bricsInLineX);
     for (int i = 0; i < bricsInLineX; i++)
     {
         availableSeats[i] = i;
     }
-    for (int i = 0; i < GetRandomValue(nSeats-1, nSeats); ++i)
+    for (int i = 0; i < GetRandomValue(1, nSeats); ++i)
     {
         int randPosition = GetRandomValue(0, availableSeats.size() - 1);
         Bric br;
@@ -85,8 +85,7 @@ void checkAndDraw(bool &wasSpacePressed,
             if (!(balls[i].isOutOfBounds)) {///Если мяч не за пределами линии рисуем его с коллизией
                 for (int j = 0; j < brics.size(); ++j) {
 
-                    if(balls[i].checkCollisionBall(balls[i].BallPosition, balls[i].ballRadius,
-                                                {brics[j].bricPosition.x, brics[j].bricPosition.y})){
+                    if(balls[i].checkCollisionBall({brics[j].bricPosition.x, brics[j].bricPosition.y})){
                         ///////////////////////////////////////////////////////////////////////
                         balls[i].ballReflaction({brics[j].bricPosition.x, brics[j].bricPosition.y});
                         ///////////////////////////////////////////////////////////////////////

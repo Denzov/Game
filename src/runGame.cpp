@@ -38,7 +38,7 @@ void runGame( bool &wasSpacePressed,
         Vector2 cannonAngle;
         cannonAngle = preEntryInBall(wasSpacePressed, inGame, cannon, lastBall, balls, valueBalls, brics);
         /////////////////////////////////////////////////////////////
-        previewOfBalls(cannonAngle, cannon, brics);
+        previewOfBalls(cannonAngle, cannon, brics, inGame);
         checkAndDraw(wasSpacePressed,
                      cannon,
                      lastBall,
