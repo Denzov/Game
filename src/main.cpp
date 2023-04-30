@@ -35,6 +35,7 @@ int main() {
     int valueBalls = 1;                        //Количество мячей
     int gamesPoints = 0;
     int nSeats = 0;
+
     int addBalls =0;
     //////////////______STRUCTS______////////////////////
     Cannon cannon;
@@ -42,33 +43,6 @@ int main() {
 
     string path = "D:\\RayLibTemplate\\BestScore.txt";
     /////////////////////////////////////////////////////////
-//
-//    ofstream fout;
-//    int x = 1000;
-//
-//    if (fout.is_open()) {
-//        fout.write((char*)&x, sizeof(int));
-//
-//
-//    }
-//    fout.close();
-//
-//
-//
-//    ifstream fin;
-//    fin.open(path);
-//    if (fin.is_open()) {
-//        int i;
-//        while (fin.read((char*)&i, sizeof(int)))
-//        {
-//            cout << i;
-//        }
-//
-//
-//
-//    }
-//    fin.close();
-//
 
 
     SetTargetFPS(FPS);
@@ -77,7 +51,8 @@ int main() {
         cout << timeInGame<<endl;
         drawMenu(inMenu, lastEnterPressed, isGameOver);
         int speedGame;
-        for (int i = 0; i < int(timeInGame/stepTimeSpeedInGame)+1; ++i) {
+        //int(timeInGame/stepTimeSpeedInGame)+1
+        for (int i = 0; i < 10; ++i) {
             runGame(wasSpacePressed, inGame, cannon, lastBall, balls, valueBalls, brics, inMenu, lastEnterPressed, gamesPoints,
                     isGameOver, nSeats, ballWithPoints, addBalls, timeInGame);
         }

@@ -8,8 +8,8 @@ bool Ball::checkCollisionBall( Vector2 bricPosition) {
 
     Vector2 newBallPosition = {BallPosition.x + BallSpeed.x, BallPosition.y + BallSpeed.y};
     if (CheckCollisionCircleRec(newBallPosition, ballRadius, {
-            bricPosition.x,
-            bricPosition.y,
+            bricPosition.x+1,
+            bricPosition.y+1,
             (float) widthBric,
             (float) heightBric
     })) {

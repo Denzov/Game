@@ -6,7 +6,7 @@ void spawnAndShiftBrics(vector<Bric>& brics, int& gamesPoints, int &nSeats, bool
     vector<BallWithPoint> &ballWithPoints) {
     for (int i = 0; i < brics.size(); ++i) {
         brics[i].shiftBric();
-        if (brics[i].bricPosition.y + heightBric >= screenLenghtY) {
+        if (brics[i].bricPosition.y + heightBric*2 >= screenLenghtY) {
             isGameOver = true;
             gamesPoints = 0;
             balls.clear();
@@ -20,9 +20,8 @@ void spawnAndShiftBrics(vector<Bric>& brics, int& gamesPoints, int &nSeats, bool
         ballWithPoints[i].shiftPoint();
     }
 
-    if (nSeats != bricsInLineX) {
-        nSeats = (int(gamesPoints / 15) + 2)%bricsInLineX;
-    }
+    nSeats = (int(gamesPoints / 8) + 3)%bricsInLineX;
+    
     vector <int> availableSeats(bricsInLineX);
     for (int i = 0; i < bricsInLineX; i++)
     {
@@ -34,8 +33,8 @@ void spawnAndShiftBrics(vector<Bric>& brics, int& gamesPoints, int &nSeats, bool
         Bric br;
         br.bricPosition.x = availableSeats[randPosition] * widthBric;
         availableSeats.erase(availableSeats.begin() + randPosition);
-        br.point = GetRandomValue(initialPoints + gamesPoints / 2, 2 * initialPoints + gamesPoints / 2);
-        br.colorMiniBric = colorBrics[GetRandomValue(1, 5)];
+        br.point = GetRandomValue(initialPoints + gamesPoints, 2 * initialPoints + gamesPoints);
+        br.colorMiniBric = colorBrics[GetRandomValue(0, 5)];
         brics.push_back(br);
 
 
